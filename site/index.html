@@ -66,7 +66,7 @@
     .controls { display: flex; gap: 8px; }
     .control { min-height: 38px; padding: 0 12px; border: 1px solid var(--line); color: var(--ink); background: transparent; cursor: pointer; font: 650 .75rem/1 "Consolas", monospace; }
     .control:hover { border-color: var(--accent); color: var(--accent); }
-    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: clamp(40px, 8vw, 110px); align-items: center; padding-block: clamp(80px, 11vw, 150px); }
+    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; padding-block: clamp(80px, 11vw, 150px); }
     .eyebrow, .stage-index { color: var(--accent); font: 650 .72rem/1.4 "Consolas", monospace; letter-spacing: .12em; }
     h1, h2, h3 { margin: 0; }
     h1 { max-width: 850px; margin-top: 22px; font: 400 clamp(3.3rem, 7vw, 7rem)/.94 Georgia, serif; letter-spacing: -.055em; }
@@ -77,14 +77,6 @@
     .action.primary { color: var(--reverse); background: var(--accent); }
     .action.secondary { color: var(--accent); background: var(--accent-soft); }
     .action:hover { transform: translateY(-2px); }
-    .signal { position: relative; aspect-ratio: 1; max-width: 420px; justify-self: end; }
-    .signal::before, .signal::after { position: absolute; border: 1px solid var(--line); content: ""; inset: 8%; border-radius: 50%; }
-    .signal::after { inset: 24%; }
-    .signal-core { position: absolute; inset: 36%; display: grid; place-items: center; border: 1px solid var(--accent); color: var(--accent); background: var(--accent-soft); font: 700 1rem/1 "Consolas", monospace; }
-    .signal-node { position: absolute; width: 9px; height: 9px; border: 2px solid var(--paper); background: var(--accent); box-shadow: 0 0 16px var(--accent); animation: pulse 2.4s ease-in-out infinite alternate; }
-    .node-1 { top: 8%; left: 47%; } .node-2 { top: 29%; right: 10%; animation-delay: -.4s; } .node-3 { right: 18%; bottom: 15%; animation-delay: -.8s; }
-    .node-4 { bottom: 8%; left: 46%; animation-delay: -1.2s; } .node-5 { left: 12%; bottom: 24%; animation-delay: -1.6s; } .node-6 { top: 20%; left: 16%; animation-delay: -2s; }
-    @keyframes pulse { to { transform: scale(1.6); opacity: .45; } }
     .section { padding-block: clamp(64px, 8vw, 110px); border-top: 1px solid var(--line); }
     .section-head { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 28px; align-items: start; margin-bottom: 38px; }
     .section-head h2 { font: 400 clamp(2.4rem, 4vw, 4.2rem)/1 Georgia, serif; letter-spacing: -.045em; }
@@ -105,7 +97,6 @@
     @media (max-width: 860px) {
       .nav { display: none; }
       .hero { grid-template-columns: 1fr; }
-      .signal { width: min(320px, 78vw); justify-self: start; }
       .section-head { grid-template-columns: 1fr; gap: 10px; }
       .stages, .principles { grid-template-columns: 1fr 1fr; }
     }
@@ -153,11 +144,6 @@
             <span data-en="Explore the Agent Loop" data-zh="查看 Agent 闭环">Explore the Agent Loop</span><span>↓</span>
           </a>
         </div>
-      </div>
-      <div class="signal" aria-hidden="true">
-        <div class="signal-core">AaaS</div>
-        <i class="signal-node node-1"></i><i class="signal-node node-2"></i><i class="signal-node node-3"></i>
-        <i class="signal-node node-4"></i><i class="signal-node node-5"></i><i class="signal-node node-6"></i>
       </div>
     </section>
 
