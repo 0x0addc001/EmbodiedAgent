@@ -55,17 +55,21 @@
     .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid var(--ink); color: var(--ink); font: 700 .82rem/1 "Consolas", monospace; }
     .brand strong { display: block; font-family: "Constantia", "Iowan Old Style", Georgia, serif; font-size: 1.18rem; font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
     .nav { display: flex; justify-content: center; gap: 34px; }
-    .nav a { position: relative; color: var(--ink); font-family: "Aptos", "Segoe UI", sans-serif; font-size: .82rem; font-weight: 550; letter-spacing: 0; text-decoration: none; text-transform: none; }
+    .nav a { position: relative; color: var(--ink); font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", "SimSun", serif; font-size: .82rem; font-weight: 550; letter-spacing: 0; text-decoration: none; text-transform: none; }
     .nav a::after { position: absolute; right: 0; bottom: -7px; left: 0; height: 1px; content: ""; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 250ms ease; }
     .nav a:hover::after, .nav a:focus-visible::after, .nav a.is-active::after { transform: scaleX(1); transform-origin: left; }
     .controls { display: flex; align-items: center; justify-self: end; gap: 14px; }
     .control { padding: 0; border: 0; color: var(--ink); background: transparent; cursor: pointer; font-family: "Aptos", "Segoe UI", sans-serif; }
-    .control[data-language] { display: flex; align-items: center; gap: 6px; padding: 8px 2px; font-size: .82rem; font-weight: 600; }
+    .control[data-language] { display: flex; align-items: center; gap: 6px; padding: 8px 2px; font-family: "SFMono-Regular", "Cascadia Code", "Roboto Mono", "Liberation Mono", monospace; font-size: .82rem; font-weight: 600; }
     .control[data-language] > span:not(.language-divider) { color: var(--muted); transition: color 180ms ease; }
     .control[data-language] > span.is-current { color: var(--ink); }
     .language-divider { color: color-mix(in srgb, var(--ink) 34%, transparent); }
-    .control[data-theme-toggle] { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); font-size: .8rem; transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 220ms ease; }
-    .control[data-theme-toggle]:hover { color: var(--reverse); border-color: var(--accent); background: var(--accent); transform: rotate(8deg); }
+    .control[data-theme-toggle] { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line-strong); transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 220ms ease; }
+    .control[data-theme-toggle]:hover { color: var(--paper); border-color: var(--accent); background: var(--accent); transform: rotate(8deg); }
+    .theme-icon { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .theme-icon-sun { display: none; }
+    :root[data-theme="dark"] .theme-icon-sun { display: block; }
+    :root[data-theme="dark"] .theme-icon-moon { display: none; }
     .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; padding-top: calc(88px + clamp(80px, 11vw, 150px)); padding-bottom: clamp(80px, 11vw, 150px); }
     .stage-index { color: var(--accent); font: 650 .72rem/1.4 "Consolas", monospace; letter-spacing: .12em; }
     h1, h2, h3 { margin: 0; }
@@ -124,7 +128,7 @@
       </nav>
       <div class="controls">
         <button class="control" type="button" data-language><span data-language-current="en">EN</span><span class="language-divider">/</span><span data-language-current="zh">中文</span></button>
-        <button class="control" type="button" data-theme-toggle aria-label="Toggle color theme">◐</button>
+        <button class="control" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"></circle><path d="M12 2v2.2M12 19.8V22M4.93 4.93l1.56 1.56M17.51 17.51l1.56 1.56M2 12h2.2M19.8 12H22M4.93 19.07l1.56-1.56M17.51 6.49l1.56-1.56"></path></svg><svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.3A8.5 8.5 0 0 1 8.7 3.8 8.5 8.5 0 1 0 20.2 15.3Z"></path></svg></button>
       </div>
     </div>
   </header>
@@ -228,9 +232,11 @@
       themeButton.addEventListener("click", () => {
         const next = root.dataset.theme === "dark" ? "light" : "dark";
         root.dataset.theme = next;
+        themeButton.setAttribute("aria-pressed", String(next === "dark"));
         try { localStorage.setItem("EmbodiedAgent-theme", next); } catch {}
       });
       applyLanguage();
+      themeButton.setAttribute("aria-pressed", String(root.dataset.theme === "dark"));
 
       const topbar = document.querySelector(".topbar");
       const navLinks = [...document.querySelectorAll(".nav a")];
