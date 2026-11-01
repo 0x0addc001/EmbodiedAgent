@@ -54,14 +54,15 @@
       background: color-mix(in srgb, var(--paper) 84%, transparent);
       backdrop-filter: blur(18px);
     }
-    .topbar-inner { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
-    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--accent); color: var(--accent); font: 700 12px/1 "Consolas", monospace; }
-    .brand strong { display: block; font-family: Georgia, serif; font-size: 1rem; }
-    .nav { display: flex; gap: 24px; }
-    .nav a { color: var(--muted); font: 600 .76rem/1 "Consolas", monospace; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
-    .nav a:hover { color: var(--accent); }
-    .controls { display: flex; gap: 8px; }
+    .topbar-inner { min-height: 76px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+    .brand { display: flex; align-items: center; justify-self: start; gap: 12px; text-decoration: none; }
+    .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid var(--ink); color: var(--ink); font: 700 .82rem/1 "Consolas", monospace; }
+    .brand strong { display: block; font-family: Georgia, serif; font-size: 1.18rem; font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
+    .nav { display: flex; justify-content: center; gap: 34px; }
+    .nav a { position: relative; color: var(--ink); font-family: "Aptos", "Segoe UI", sans-serif; font-size: .82rem; font-weight: 550; letter-spacing: 0; text-decoration: none; text-transform: none; }
+    .nav a::after { position: absolute; right: 0; bottom: -7px; left: 0; height: 1px; content: ""; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 250ms ease; }
+    .nav a:hover::after, .nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
+    .controls { display: flex; justify-self: end; gap: 8px; }
     .control { min-height: 38px; padding: 0 12px; border: 1px solid var(--line); color: var(--ink); background: transparent; cursor: pointer; font: 650 .75rem/1 "Consolas", monospace; }
     .control:hover { border-color: var(--accent); color: var(--accent); }
     .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; padding-block: clamp(80px, 11vw, 150px); }
@@ -114,8 +115,8 @@
         <span><strong>EmbodiedAgent</strong></span>
       </a>
       <nav class="nav" aria-label="Project navigation">
-        <a href="#principles" data-en="First Principle" data-zh="First Principle">First Principle</a>
-        <a href="#loop" data-en="Agent Loop" data-zh="Agent Loop">Agent Loop</a>
+        <a href="#principles" data-en="Principle" data-zh="Principle">Principle</a>
+        <a href="#loop" data-en="Loop" data-zh="Loop">Loop</a>
       </nav>
       <div class="controls">
         <button class="control" type="button" data-language>中 / EN</button>
@@ -141,7 +142,7 @@
     <section class="section" id="principles">
       <div class="section-head">
         <div>
-          <h2 data-en="First Principle" data-zh="First Principle">First Principle</h2>
+          <h2 data-en="Principle" data-zh="Principle">Principle</h2>
           <p data-en="The Agent is only as useful as the boundaries around it are clear." data-zh="Agent 的价值，取决于它周围的边界是否足够清晰。">The Agent is only as useful as the boundaries around it are clear.</p>
         </div>
       </div>
@@ -166,7 +167,7 @@
     <section class="section" id="loop">
       <div class="section-head">
         <div>
-          <h2 data-en="Agent Loop" data-zh="Agent Loop">Agent Loop</h2>
+          <h2 data-en="Loop" data-zh="Loop">Loop</h2>
           <p data-en="From raw signals to measurable behavior, each layer contributes a distinct part of the Agent system." data-zh="从原始信号到可衡量行为，每一层都承担 Agent 系统中不可替代的一部分。">From raw signals to measurable behavior, each layer contributes a distinct part of the Agent system.</p>
         </div>
       </div>
