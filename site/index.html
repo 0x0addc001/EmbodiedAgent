@@ -35,7 +35,7 @@
       --line: rgba(207,225,255,.16);
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    html { font-size: 17px; scroll-behavior: smooth; scroll-padding-top: 110px; }
     body {
       margin: 0;
       color: var(--ink);
@@ -82,7 +82,7 @@
     html[lang="zh"] .hero-title-accent { font-style: normal; }
     .hero-title .is-streaming::after { display: inline-block; width: .06em; height: .82em; margin-left: .08em; background: var(--accent); content: ""; vertical-align: -.05em; animation: caret 720ms steps(1, end) infinite; }
     @keyframes caret { 50% { opacity: 0; } }
-    .hero-subtitle { max-width: 760px; margin: 28px 0 0; color: var(--ink); font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", "SimSun", serif; font-size: clamp(1.06rem, 1.2vw, 1.24rem); line-height: 1.78; }
+    .hero-subtitle { max-width: 910px; margin: 32px 0 0; color: var(--ink); font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", "SimSun", serif; font-size: clamp(1.06rem, 1.2vw, 1.24rem); line-height: 1.78; }
     .hero-portrait { width: min(100%, 600px); justify-self: end; pointer-events: none; }
     .hero-portrait img { display: block; width: 100%; height: auto; filter: none; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
@@ -110,6 +110,7 @@
       .topbar-inner { padding-inline: 24px; }
       .hero { padding-top: calc(76px + 66px); }
       .nav { display: none; }
+      .hero-subtitle { max-width: 680px; }
       .hero { grid-template-columns: 1fr; }
       .hero-portrait { width: min(520px, 82vw); justify-self: start; }
       html[lang="en"] .hero-title { font-size: clamp(2.55rem, 8.5vw, 3.8rem); }
@@ -122,6 +123,7 @@
       .control { padding-inline: 9px; }
       html[lang="en"] .hero-title { font-size: clamp(2rem, 7.8vw, 3.05rem); line-height: 1.1; }
       html[lang="zh"] .hero-title { font-size: clamp(2.7rem, 10.8vw, 3.75rem); line-height: 1.16; }
+      .hero-subtitle { margin-top: 26px; font-size: .94rem; }
       .stages, .principles { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; scroll-behavior: auto !important; } }
