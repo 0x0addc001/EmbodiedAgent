@@ -35,7 +35,7 @@
       --line: rgba(207,225,255,.16);
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
     body {
       margin: 0;
       color: var(--ink);
@@ -48,24 +48,25 @@
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
     .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
-    .topbar {
-      position: sticky; top: 0; z-index: 20;
-      border-bottom: 1px solid var(--line);
-      background: color-mix(in srgb, var(--paper) 84%, transparent);
-      backdrop-filter: blur(18px);
-    }
-    .topbar-inner { min-height: 76px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
+    .topbar { position: fixed; z-index: 100; top: 0; left: 0; width: 100%; height: 88px; border-bottom: 1px solid transparent; transition: height 300ms ease, border-color 300ms ease, background-color 300ms ease; }
+    .topbar.is-scrolled { height: 72px; border-color: var(--line); background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(18px); }
+    .topbar-inner { width: 100%; height: 100%; margin: 0; padding-inline: max(48px, calc((100vw - 1380px) / 2)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
     .brand { display: flex; align-items: center; justify-self: start; gap: 12px; text-decoration: none; }
     .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid var(--ink); color: var(--ink); font: 700 .82rem/1 "Consolas", monospace; }
-    .brand strong { display: block; font-family: Georgia, serif; font-size: 1.18rem; font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
+    .brand strong { display: block; font-family: "Constantia", "Iowan Old Style", Georgia, serif; font-size: 1.18rem; font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
     .nav { display: flex; justify-content: center; gap: 34px; }
     .nav a { position: relative; color: var(--ink); font-family: "Aptos", "Segoe UI", sans-serif; font-size: .82rem; font-weight: 550; letter-spacing: 0; text-decoration: none; text-transform: none; }
     .nav a::after { position: absolute; right: 0; bottom: -7px; left: 0; height: 1px; content: ""; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 250ms ease; }
-    .nav a:hover::after, .nav a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
-    .controls { display: flex; justify-self: end; gap: 8px; }
-    .control { min-height: 38px; padding: 0 12px; border: 1px solid var(--line); color: var(--ink); background: transparent; cursor: pointer; font: 650 .75rem/1 "Consolas", monospace; }
-    .control:hover { border-color: var(--accent); color: var(--accent); }
-    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; padding-block: clamp(80px, 11vw, 150px); }
+    .nav a:hover::after, .nav a:focus-visible::after, .nav a.is-active::after { transform: scaleX(1); transform-origin: left; }
+    .controls { display: flex; align-items: center; justify-self: end; gap: 14px; }
+    .control { padding: 0; border: 0; color: var(--ink); background: transparent; cursor: pointer; font-family: "Aptos", "Segoe UI", sans-serif; }
+    .control[data-language] { display: flex; align-items: center; gap: 6px; padding: 8px 2px; font-size: .82rem; font-weight: 600; }
+    .control[data-language] > span:not(.language-divider) { color: var(--muted); transition: color 180ms ease; }
+    .control[data-language] > span.is-current { color: var(--ink); }
+    .language-divider { color: color-mix(in srgb, var(--ink) 34%, transparent); }
+    .control[data-theme-toggle] { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--line); font-size: .8rem; transition: color 180ms ease, border-color 180ms ease, background 180ms ease, transform 220ms ease; }
+    .control[data-theme-toggle]:hover { color: var(--reverse); border-color: var(--accent); background: var(--accent); transform: rotate(8deg); }
+    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; padding-top: calc(88px + clamp(80px, 11vw, 150px)); padding-bottom: clamp(80px, 11vw, 150px); }
     .stage-index { color: var(--accent); font: 650 .72rem/1.4 "Consolas", monospace; letter-spacing: .12em; }
     h1, h2, h3 { margin: 0; }
     h1 { max-width: 850px; margin-top: 22px; font: 400 clamp(3.3rem, 7vw, 7rem)/.94 Georgia, serif; letter-spacing: -.055em; }
@@ -93,6 +94,9 @@
     .principles h3 { margin-top: 42px; font: 400 1.45rem/1.2 Georgia, serif; }
     .principles p { color: var(--muted); line-height: 1.65; }
     @media (max-width: 860px) {
+      .topbar { height: 76px; }
+      .topbar-inner { padding-inline: 24px; }
+      .hero { padding-top: calc(76px + 70px); }
       .nav { display: none; }
       .hero { grid-template-columns: 1fr; }
       .section-head { grid-template-columns: 1fr; gap: 10px; }
@@ -119,7 +123,7 @@
         <a href="#loop" data-en="Loop" data-zh="Loop">Loop</a>
       </nav>
       <div class="controls">
-        <button class="control" type="button" data-language>中 / EN</button>
+        <button class="control" type="button" data-language><span data-language-current="en">EN</span><span class="language-divider">/</span><span data-language-current="zh">中文</span></button>
         <button class="control" type="button" data-theme-toggle aria-label="Toggle color theme">◐</button>
       </div>
     </div>
@@ -216,7 +220,8 @@
         root.lang = language;
         document.documentElement.dataset.language = language;
         translatable.forEach((node) => { node.textContent = node.dataset[language]; });
-        languageButton.textContent = language === "en" ? "中 / EN" : "EN / 中";
+        languageButton.querySelector('[data-language-current="en"]').classList.toggle("is-current", language === "en");
+        languageButton.querySelector('[data-language-current="zh"]').classList.toggle("is-current", language === "zh");
         try { localStorage.setItem("EmbodiedAgent-language", language); } catch {}
       }
       languageButton.addEventListener("click", () => { language = language === "en" ? "zh" : "en"; applyLanguage(); });
@@ -226,6 +231,22 @@
         try { localStorage.setItem("EmbodiedAgent-theme", next); } catch {}
       });
       applyLanguage();
+
+      const topbar = document.querySelector(".topbar");
+      const navLinks = [...document.querySelectorAll(".nav a")];
+      const sections = navLinks.map((link) => document.querySelector(link.getAttribute("href")));
+      const updateChrome = () => {
+        topbar.classList.toggle("is-scrolled", window.scrollY > 24);
+        const marker = 120;
+        let active = 0;
+        sections.forEach((section, index) => {
+          if (section && section.getBoundingClientRect().top <= marker) active = index;
+        });
+        navLinks.forEach((link, index) => link.classList.toggle("is-active", index === active));
+      };
+      window.addEventListener("scroll", updateChrome, { passive: true });
+      window.addEventListener("resize", updateChrome);
+      updateChrome();
     })();
   </script>
 </body>
