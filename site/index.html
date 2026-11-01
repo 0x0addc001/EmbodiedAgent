@@ -47,7 +47,7 @@
     }
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
-    .shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .shell { width: min(1380px, calc(100% - 96px)); margin: 0 auto; }
     .topbar { position: fixed; z-index: 100; top: 0; left: 0; width: 100%; height: 88px; border-bottom: 1px solid transparent; transition: height 300ms ease, border-color 300ms ease, background-color 300ms ease; }
     .topbar.is-scrolled { height: 72px; border-color: var(--line); background: color-mix(in srgb, var(--paper) 90%, transparent); backdrop-filter: blur(18px); }
     .topbar-inner { width: 100%; height: 100%; margin: 0; padding-inline: max(48px, calc((100vw - 1380px) / 2)); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; }
@@ -70,13 +70,19 @@
     .theme-icon-sun { display: none; }
     :root[data-theme="dark"] .theme-icon-sun { display: block; }
     :root[data-theme="dark"] .theme-icon-moon { display: none; }
-    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); column-gap: clamp(36px, 5vw, 72px); row-gap: 48px; align-items: center; padding-top: calc(88px + clamp(80px, 11vw, 150px)); padding-bottom: clamp(80px, 11vw, 150px); }
+    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(420px, .85fr); column-gap: clamp(36px, 5vw, 74px); row-gap: 48px; align-items: center; padding-top: calc(88px + clamp(80px, 11vw, 150px)); padding-bottom: clamp(80px, 11vw, 150px); }
     .hero-copy { min-width: 0; }
     .stage-index { color: var(--accent); font: 650 .72rem/1.4 "Consolas", monospace; letter-spacing: .12em; }
     h1, h2, h3 { margin: 0; }
-    h1 { max-width: 850px; font: 400 clamp(3.3rem, 7vw, 7rem)/.94 "Constantia", "Iowan Old Style", Georgia, serif; letter-spacing: -.055em; }
+    .hero-title { max-width: 1180px; font-family: "Constantia", "Iowan Old Style", Georgia, serif; font-size: clamp(3.2rem, 4.35vw, 4.9rem); font-weight: 400; letter-spacing: -.05em; line-height: 1.08; }
+    .hero-title > span { display: block; }
+    .hero-title-accent { color: var(--accent); font-style: italic; }
+    html[lang="zh"] .hero-title { font-size: clamp(3.8rem, 5.2vw, 5.8rem); font-style: normal; letter-spacing: -.045em; line-height: 1.1; }
+    html[lang="zh"] .hero-title-accent { font-style: normal; }
+    .hero-title .is-streaming::after { display: inline-block; width: .06em; height: .82em; margin-left: .08em; background: var(--accent); content: ""; vertical-align: -.05em; animation: caret 720ms steps(1, end) infinite; }
+    @keyframes caret { 50% { opacity: 0; } }
     .hero-subtitle { max-width: 760px; margin: 28px 0 0; color: var(--ink); font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", "SimSun", serif; font-size: clamp(1.06rem, 1.2vw, 1.24rem); line-height: 1.78; }
-    .hero-portrait { width: min(100%, 440px); justify-self: end; pointer-events: none; }
+    .hero-portrait { width: min(100%, 600px); justify-self: end; pointer-events: none; }
     .hero-portrait img { display: block; width: 100%; height: auto; filter: none; }
     .portrait-dark { display: none; }
     :root[data-theme="dark"] .portrait-light { display: none; }
@@ -107,14 +113,17 @@
       .hero { padding-top: calc(76px + 70px); }
       .nav { display: none; }
       .hero { grid-template-columns: 1fr; }
-      .hero-portrait { width: min(360px, 82vw); justify-self: start; }
+      .hero-portrait { width: min(520px, 82vw); justify-self: start; }
+      html[lang="en"] .hero-title { font-size: clamp(2.55rem, 8.5vw, 3.8rem); }
+      html[lang="zh"] .hero-title { font-size: clamp(2.7rem, 10.8vw, 3.75rem); line-height: 1.14; }
       .section-head { grid-template-columns: 1fr; gap: 10px; }
       .stages, .principles { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 560px) {
-      .shell { width: min(100% - 32px, 1180px); }
+      .shell { width: min(100% - 32px, 1380px); }
       .control { padding-inline: 9px; }
-      h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
+      html[lang="en"] .hero-title { font-size: clamp(2rem, 7.8vw, 3.05rem); line-height: 1.1; }
+      html[lang="zh"] .hero-title { font-size: clamp(2.35rem, 9.6vw, 3.2rem); line-height: 1.16; }
       .stages, .principles { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; scroll-behavior: auto !important; } }
@@ -141,7 +150,12 @@
   <main class="shell" id="top">
     <section class="hero">
       <div class="hero-copy">
-        <h1 data-en="An Embodied Agent That Acts in the World" data-zh="一个能作用于真实世界的具身 Agent">An Embodied Agent That Acts in the World</h1>
+        <h1 class="hero-title">
+          <span data-en="Hi! I’m" data-zh="Hi！我是">Hi! I’m</span>
+          <span class="hero-title-accent" data-en="Jialiang Li’s EmbodiedAgent" data-zh="李嘉梁的EmbodiedAgent">Jialiang Li’s EmbodiedAgent</span>
+          <span data-en="A Simulation-Grounded" data-zh="一个以仿真为基石的">A Simulation-Grounded</span>
+          <span class="hero-title-accent" data-en="Embodied Agent" data-zh="具身智能 Agent">Embodied Agent</span>
+        </h1>
         <p class="hero-subtitle" data-en="Embodied engineering is action under constraints: perceive the world, plan the motion, execute safely, and learn from the result." data-zh="具身工程是在约束下行动：感知真实世界、规划动作、安全执行，并从结果中学习。">Embodied engineering is action under constraints: perceive the world, plan the motion, execute safely, and learn from the result.</p>
         <div class="hero-actions">
           <a class="action primary" href="https://github.com/0x0addc001/EmbodiedAgent" target="_blank" rel="noreferrer">
@@ -152,7 +166,8 @@
       <div class="hero-portrait" aria-hidden="true">
         <img class="portrait-light" src="./assets/portrait-light.png" alt="">
         <img class="portrait-dark" src="./assets/portrait-dark.png" alt="">
-      </div>    </section>
+      </div>
+    </section>
 
     <section class="section" id="principles">
       <div class="section-head">
@@ -227,6 +242,56 @@
       const themeButton = document.querySelector("[data-theme-toggle]");
       const translatable = [...document.querySelectorAll("[data-en][data-zh]")];
       let language = root.lang === "zh" ? "zh" : "en";
+      const heroLines = [...document.querySelectorAll(".hero-title > span")];
+      const heroSubtitle = document.querySelector(".hero-subtitle");
+      const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+      const streamTimers = [];
+      let streamToken = 0;
+
+      function clearStreamTimers() {
+        streamToken += 1;
+        streamTimers.splice(0).forEach(clearTimeout);
+      }
+
+      function wait(ms, token) {
+        return new Promise((resolve) => {
+          const timer = setTimeout(() => resolve(token === streamToken), ms);
+          streamTimers.push(timer);
+        });
+      }
+
+      async function streamText(element, text, token) {
+        element.style.visibility = "visible";
+        element.classList.add("is-streaming");
+        element.textContent = "";
+        for (const character of Array.from(text)) {
+          if (token !== streamToken) return false;
+          element.textContent += character;
+          await wait(/[，。！？；：,.!?;:]/.test(character) ? 62 : 18, token);
+        }
+        element.classList.remove("is-streaming");
+        return token === streamToken;
+      }
+
+      async function streamHero() {
+        clearStreamTimers();
+        const token = streamToken;
+        if (reduceMotion.matches) return;
+        const lineTexts = heroLines.map((line) => line.textContent.trim());
+        const subtitleText = heroSubtitle.textContent.trim();
+        heroLines.forEach((line) => {
+          line.textContent = "";
+          line.style.visibility = "hidden";
+        });
+        heroSubtitle.textContent = "";
+        heroSubtitle.style.visibility = "hidden";
+        for (const [index, line] of heroLines.entries()) {
+          if (!(await streamText(line, lineTexts[index], token))) return;
+          await wait(110, token);
+        }
+        await streamText(heroSubtitle, subtitleText, token);
+      }
+
       function applyLanguage() {
         root.lang = language;
         document.documentElement.dataset.language = language;
@@ -243,6 +308,7 @@
         try { localStorage.setItem("EmbodiedAgent-theme", next); } catch {}
       });
       applyLanguage();
+      streamHero();
       themeButton.setAttribute("aria-pressed", String(root.dataset.theme === "dark"));
 
       const topbar = document.querySelector(".topbar");
