@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="EmbodiedAgent closes the perception-planning-action loop across simulation and physical environments with hard safety limits.">
   <meta name="theme-color" content="#07111f">
-  <title>Embodied Intelligence Agent — Agent-as-a-Service</title>
+  <title>EmbodiedAgent</title>
   <script>
     try {
       const savedTheme = localStorage.getItem("EmbodiedAgent-theme");
@@ -70,7 +70,7 @@
     .theme-icon-sun { display: none; }
     :root[data-theme="dark"] .theme-icon-sun { display: block; }
     :root[data-theme="dark"] .theme-icon-moon { display: none; }
-    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(420px, .85fr); column-gap: clamp(36px, 5vw, 74px); row-gap: 48px; align-items: center; padding-top: calc(88px + clamp(80px, 11vw, 150px)); padding-bottom: clamp(80px, 11vw, 150px); }
+    .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(420px, .85fr); column-gap: clamp(36px, 5vw, 74px); row-gap: 48px; align-items: center; padding-top: calc(88px + 72px); padding-bottom: 64px; }
     .hero-copy { min-width: 0; }
     .stage-index { color: var(--accent); font: 650 .72rem/1.4 "Consolas", monospace; letter-spacing: .12em; }
     h1, h2, h3 { margin: 0; }
@@ -84,9 +84,6 @@
     .hero-subtitle { max-width: 760px; margin: 28px 0 0; color: var(--ink); font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", "SimSun", serif; font-size: clamp(1.06rem, 1.2vw, 1.24rem); line-height: 1.78; }
     .hero-portrait { width: min(100%, 600px); justify-self: end; pointer-events: none; }
     .hero-portrait img { display: block; width: 100%; height: auto; filter: none; }
-    .portrait-dark { display: none; }
-    :root[data-theme="dark"] .portrait-light { display: none; }
-    :root[data-theme="dark"] .portrait-dark { display: block; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
     .action { display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 22px; border: 1px solid var(--accent); text-decoration: none; font-family: "Baskerville", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Songti SC", "STSong", "SimSun", serif; font-size: .95rem; font-weight: 600; letter-spacing: .01em; }
     .action.primary { color: var(--reverse); background: var(--accent); }
@@ -110,7 +107,7 @@
     @media (max-width: 860px) {
       .topbar { height: 76px; }
       .topbar-inner { padding-inline: 24px; }
-      .hero { padding-top: calc(76px + 70px); }
+      .hero { padding-top: calc(76px + 66px); }
       .nav { display: none; }
       .hero { grid-template-columns: 1fr; }
       .hero-portrait { width: min(520px, 82vw); justify-self: start; }
@@ -137,8 +134,8 @@
         <span><strong>Jialiang Li's EmbodiedAgent</strong></span>
       </a>
       <nav class="nav" aria-label="Project navigation">
-        <a href="#principles" data-en="Principle" data-zh="Principle">Principle</a>
-        <a href="#loop" data-en="Loop" data-zh="Loop">Loop</a>
+        <a href="#principles" data-en="Design" data-zh="设计">Design</a>
+        <a href="#loop" data-en="Implementation" data-zh="实现">Implementation</a>
       </nav>
       <div class="controls">
         <button class="control" type="button" data-language><span data-language-current="en">EN</span><span class="language-divider">/</span><span data-language-current="zh">中文</span></button>
@@ -164,15 +161,14 @@
         </div>
       </div>
       <div class="hero-portrait" aria-hidden="true">
-        <img class="portrait-light" src="./assets/portrait-light.png" alt="">
-        <img class="portrait-dark" src="./assets/portrait-dark.png" alt="">
+        <img class="portrait-image" src="./assets/portrait-light.png" alt="">
       </div>
     </section>
 
     <section class="section" id="principles">
       <div class="section-head">
         <div>
-          <h2 data-en="Principle" data-zh="Principle">Principle</h2>
+          <h2 data-en="Design" data-zh="设计">Design</h2>
           <p data-en="The Agent is only as useful as the boundaries around it are clear." data-zh="Agent 的价值，取决于它周围的边界是否足够清晰。">The Agent is only as useful as the boundaries around it are clear.</p>
         </div>
       </div>
@@ -197,7 +193,7 @@
     <section class="section" id="loop">
       <div class="section-head">
         <div>
-          <h2 data-en="Loop" data-zh="Loop">Loop</h2>
+          <h2 data-en="Implementation" data-zh="实现">Implementation</h2>
           <p data-en="From raw signals to measurable behavior, each layer contributes a distinct part of the Agent system." data-zh="从原始信号到可衡量行为，每一层都承担 Agent 系统中不可替代的一部分。">From raw signals to measurable behavior, each layer contributes a distinct part of the Agent system.</p>
         </div>
       </div>
@@ -244,6 +240,7 @@
       let language = root.lang === "zh" ? "zh" : "en";
       const heroLines = [...document.querySelectorAll(".hero-title > span")];
       const heroSubtitle = document.querySelector(".hero-subtitle");
+      const portraitImage = document.querySelector(".portrait-image");
       const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
       const streamTimers = [];
       let streamToken = 0;
@@ -292,6 +289,10 @@
         await streamText(heroSubtitle, subtitleText, token);
       }
 
+      function syncPortrait() {
+        portraitImage.src = root.dataset.theme === "dark" ? "./assets/portrait-dark.png" : "./assets/portrait-light.png";
+      }
+
       function applyLanguage() {
         root.lang = language;
         document.documentElement.dataset.language = language;
@@ -304,11 +305,13 @@
       themeButton.addEventListener("click", () => {
         const next = root.dataset.theme === "dark" ? "light" : "dark";
         root.dataset.theme = next;
+        syncPortrait();
         themeButton.setAttribute("aria-pressed", String(next === "dark"));
         try { localStorage.setItem("EmbodiedAgent-theme", next); } catch {}
       });
       applyLanguage();
       streamHero();
+      syncPortrait();
       themeButton.setAttribute("aria-pressed", String(root.dataset.theme === "dark"));
 
       const topbar = document.querySelector(".topbar");
