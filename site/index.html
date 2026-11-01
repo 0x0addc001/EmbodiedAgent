@@ -74,10 +74,11 @@
     .hero-copy { min-width: 0; }
     .stage-index { color: var(--accent); font: 650 .72rem/1.4 "Consolas", monospace; letter-spacing: .12em; }
     h1, h2, h3 { margin: 0; }
-    .hero-title { max-width: 1180px; font-family: "Constantia", "Iowan Old Style", Georgia, serif; font-size: clamp(2.9rem, 3.6vw, 3.4rem); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; }
+    .hero-title { max-width: 1180px; font-family: "Constantia", "Iowan Old Style", Georgia, serif; font-size: clamp(3.8rem, 5.2vw, 5.8rem); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; }
     .hero-title > span { display: block; }
+    html[lang="en"] .hero-title { font-size: clamp(3.2rem, 4.35vw, 4.9rem); letter-spacing: -.05em; }
     .hero-title-accent { color: var(--accent); font-style: italic; }
-    html[lang="zh"] .hero-title { font-size: clamp(2.7rem, 3.4vw, 3.15rem); font-style: normal; letter-spacing: -.035em; line-height: 1.1; }
+    html[lang="zh"] .hero-title { font-size: clamp(3.8rem, 5.2vw, 5.8rem); font-style: normal; letter-spacing: -.045em; line-height: 1.1; }
     html[lang="zh"] .hero-title-accent { font-style: normal; }
     .hero-title .is-streaming::after { display: inline-block; width: .06em; height: .82em; margin-left: .08em; background: var(--accent); content: ""; vertical-align: -.05em; animation: caret 720ms steps(1, end) infinite; }
     @keyframes caret { 50% { opacity: 0; } }
@@ -111,16 +112,16 @@
       .nav { display: none; }
       .hero { grid-template-columns: 1fr; }
       .hero-portrait { width: min(520px, 82vw); justify-self: start; }
-      html[lang="en"] .hero-title { font-size: clamp(2.1rem, 7vw, 3rem); }
-      html[lang="zh"] .hero-title { font-size: clamp(1.95rem, 6.2vw, 2.8rem); line-height: 1.14; }
+      html[lang="en"] .hero-title { font-size: clamp(2.55rem, 8.5vw, 3.8rem); }
+      html[lang="zh"] .hero-title { font-size: clamp(3.2rem, 10.2vw, 5.1rem); line-height: 1.14; }
       .section-head { grid-template-columns: 1fr; gap: 10px; }
       .stages, .principles { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 560px) {
       .shell { width: min(100% - 32px, 1380px); }
       .control { padding-inline: 9px; }
-      html[lang="en"] .hero-title { font-size: clamp(1.75rem, 6.8vw, 2.45rem); line-height: 1.1; }
-      html[lang="zh"] .hero-title { font-size: clamp(1.8rem, 6vw, 2.5rem); line-height: 1.16; }
+      html[lang="en"] .hero-title { font-size: clamp(2rem, 7.8vw, 3.05rem); line-height: 1.1; }
+      html[lang="zh"] .hero-title { font-size: clamp(2.7rem, 10.8vw, 3.75rem); line-height: 1.16; }
       .stages, .principles { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; scroll-behavior: auto !important; } }
