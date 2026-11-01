@@ -6,8 +6,6 @@ EmbodiedAgent closes the perception-planning-action loop across simulation and p
 
 面向具身智能的 Agent：在仿真与真实环境中闭合感知、规划、行动回路，并以硬性安全边界控制物理执行。
 
-**Status:** Project scaffold · [Portfolio](https://0x0addc001.github.io/#use-cases)
-
 ## Agent loop
 
 | Stage | Responsibility |
