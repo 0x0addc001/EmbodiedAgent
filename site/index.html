@@ -69,6 +69,7 @@
     h1, h2, h3 { margin: 0; }
     h1 { max-width: 850px; margin-top: 22px; font: 400 clamp(3.3rem, 7vw, 7rem)/.94 Georgia, serif; letter-spacing: -.055em; }
     .tagline { margin: 24px 0 0; color: var(--accent); font: italic 400 clamp(1.3rem, 2vw, 1.8rem)/1.35 Georgia, serif; }
+    html[lang="zh"] .tagline { font-style: normal; }
     .intro { max-width: 760px; margin: 24px 0 0; color: var(--muted); font-size: 1.08rem; line-height: 1.8; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
     .action { display: inline-flex; align-items: center; gap: 10px; min-height: 46px; padding: 0 16px; border: 1px solid var(--accent); text-decoration: none; font: 650 .78rem/1 "Consolas", monospace; letter-spacing: .04em; }
@@ -113,12 +114,12 @@
         <span><strong>EmbodiedAgent</strong></span>
       </a>
       <nav class="nav" aria-label="Project navigation">
-        <a href="#loop" data-en="Agent Loop" data-zh="Agent 闭环">Agent Loop</a>
-        <a href="#principles" data-en="Principles" data-zh="设计原则">Principles</a>
+        <a href="#principles" data-en="First Principle" data-zh="First Principle">First Principle</a>
+        <a href="#loop" data-en="Agent Loop" data-zh="Agent Loop">Agent Loop</a>
       </nav>
       <div class="controls">
         <button class="control" type="button" data-language>中 / EN</button>
-        <button class="control" type="button" data-theme aria-label="Toggle color theme">◐</button>
+        <button class="control" type="button" data-theme-toggle aria-label="Toggle color theme">◐</button>
       </div>
     </div>
   </header>
@@ -137,10 +138,35 @@
       </div>
     </section>
 
+    <section class="section" id="principles">
+      <div class="section-head">
+        <div>
+          <h2 data-en="First Principle" data-zh="First Principle">First Principle</h2>
+          <p data-en="The Agent is only as useful as the boundaries around it are clear." data-zh="Agent 的价值，取决于它周围的边界是否足够清晰。">The Agent is only as useful as the boundaries around it are clear.</p>
+        </div>
+      </div>
+      <div class="principles">
+        <article>
+          <span>01</span>
+          <h3 data-en="Safety is independent" data-zh="安全必须独立">Safety is independent</h3>
+          <p data-en="An external governor bounds and interrupts every action." data-zh="独立安全治理器负责限制并中断每一个动作。">An external governor bounds and interrupts every action.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3 data-en="Simulation before hardware" data-zh="先仿真后实机">Simulation before hardware</h3>
+          <p data-en="Real-world tests begin only after simulation gates pass." data-zh="只有通过仿真门槛后，才能开始真实环境测试。">Real-world tests begin only after simulation gates pass.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3 data-en="Every action is observable" data-zh="动作全程可观察">Every action is observable</h3>
+          <p data-en="Observations, decisions, failures and recovery remain logged." data-zh="观察、决策、失败与恢复过程都必须留痕。">Observations, decisions, failures and recovery remain logged.</p>
+        </article></div>
+    </section>
+
     <section class="section" id="loop">
       <div class="section-head">
         <div>
-          <h2 data-en="One loop. Six layers." data-zh="一个闭环，六个层次。">One loop. Six layers.</h2>
+          <h2 data-en="Agent Loop" data-zh="Agent Loop">Agent Loop</h2>
           <p data-en="From raw signals to measurable behavior, each layer contributes a distinct part of the Agent system." data-zh="从原始信号到可衡量行为，每一层都承担 Agent 系统中不可替代的一部分。">From raw signals to measurable behavior, each layer contributes a distinct part of the Agent system.</p>
         </div>
       </div>
@@ -176,38 +202,13 @@
           <p data-en="Task success, safety, robustness and sim-to-real gap." data-zh="任务成功率、安全、鲁棒性与虚实迁移差距。">Task success, safety, robustness and sim-to-real gap.</p>
         </article></div>
     </section>
-
-    <section class="section" id="principles">
-      <div class="section-head">
-        <div>
-          <h2 data-en="Built to stay trustworthy." data-zh="可靠，是设计出来的。">Built to stay trustworthy.</h2>
-          <p data-en="The Agent is only as useful as the boundaries around it are clear." data-zh="Agent 的价值，取决于它周围的边界是否足够清晰。">The Agent is only as useful as the boundaries around it are clear.</p>
-        </div>
-      </div>
-      <div class="principles">
-        <article>
-          <span>01</span>
-          <h3 data-en="Safety is independent" data-zh="安全必须独立">Safety is independent</h3>
-          <p data-en="An external governor bounds and interrupts every action." data-zh="独立安全治理器负责限制并中断每一个动作。">An external governor bounds and interrupts every action.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3 data-en="Simulation before hardware" data-zh="先仿真后实机">Simulation before hardware</h3>
-          <p data-en="Real-world tests begin only after simulation gates pass." data-zh="只有通过仿真门槛后，才能开始真实环境测试。">Real-world tests begin only after simulation gates pass.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3 data-en="Every action is observable" data-zh="动作全程可观察">Every action is observable</h3>
-          <p data-en="Observations, decisions, failures and recovery remain logged." data-zh="观察、决策、失败与恢复过程都必须留痕。">Observations, decisions, failures and recovery remain logged.</p>
-        </article></div>
-    </section>
   </main>
 
   <script>
     (() => {
       const root = document.documentElement;
       const languageButton = document.querySelector("[data-language]");
-      const themeButton = document.querySelector("[data-theme]");
+      const themeButton = document.querySelector("[data-theme-toggle]");
       const translatable = [...document.querySelectorAll("[data-en][data-zh]")];
       let language = root.lang === "zh" ? "zh" : "en";
       function applyLanguage() {
